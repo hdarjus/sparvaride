@@ -7,7 +7,7 @@
 bool counting_rule_holds(
     const arma::umat& delta);
 
-// [[Rcpp::export]]
+// [[Rcpp::export("variance_is_identified_identicator")]]
 bool counting_rule_holds_r(
     const Rcpp::IntegerMatrix& delta_in) {
   arma::umat delta (delta_in.nrow(), delta_in.ncol());
