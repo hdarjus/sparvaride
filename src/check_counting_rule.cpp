@@ -11,7 +11,7 @@ bool counting_rule_holds(
 bool counting_rule_holds_r(
     const Rcpp::IntegerMatrix& delta_in) {
   arma::umat delta (delta_in.nrow(), delta_in.ncol());
-  std::copy(delta_in.cbegin(), delta_in.cend(), delta.begin());
+  std::copy(delta_in.cbegin(), delta_in.cend(), delta.begin());  // why copy??
   return counting_rule_holds(delta);
 }
 
