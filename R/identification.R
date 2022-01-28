@@ -40,6 +40,7 @@ compute_rref <- function (m, tolerance) {
 #' @param m factor loading matrix with dimensions factors x observations
 #' @param tolerance tolerance for numeric errors; if \code{abs(a) < tolerance} then
 #' \code{a} is considered to be zero
+#' @export
 to_glt <- function (m, tolerance) {
   pivot_columns <- compute_rref(m, tolerance)$pivot_columns
   qr <- compute_qr_decomposition(m[, pivot_columns])
@@ -47,4 +48,16 @@ to_glt <- function (m, tolerance) {
   result <- crossprod(q, m)
   result[abs(result) < tolerance] <- 0
   result
+}
+
+#' @param m 0-1 identicator of factor loading matrix with dimensions factors x observations
+#' @export
+is_glt <- function (m) {
+    m <- m[rowSums(m) > 0, colSums(m) > 0, drop = FALSE]
+    if (NROW(m) == 0) {
+        TRUE
+    } else {
+        cs <- which(colSums(m) == 1L)
+        length(cs) > 0 && is_glt(m[which(m[, cs[1]] != 0), -cs[1], drop = FALSE])
+    }
 }
