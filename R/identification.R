@@ -1,8 +1,11 @@
 default_tolerance <- 2 * sqrt(.Machine$double.eps)
 
+#' Functions for working with the GLT framework
+#'
 #' @param m factor loading matrix with dimensions factors x observations
 #' @param tolerance tolerance for numeric errors; if \code{abs(a) < tolerance} then
 #' \code{a} is considered to be zero
+#' @rdname glt_framework
 #' @export
 variance_is_identified <- function (m, tolerance = default_tolerance) {
   m_glt <- to_glt(m, tolerance = tolerance)
@@ -13,6 +16,17 @@ variance_is_identified <- function (m, tolerance = default_tolerance) {
     delta <- delta[, colSums(delta) > 0]
     variance_is_identified_identicator(delta)
   }
+}
+
+#' @rdname glt_framework
+#' @export
+to_glt <- function (m, tolerance) {
+  pivot_columns <- compute_rref(m, tolerance)$pivot_columns
+  qr <- compute_qr_decomposition(m[, pivot_columns])
+  q <- base::qr.Q(qr)
+  result <- crossprod(q, m)
+  result[abs(result) < tolerance] <- 0
+  result
 }
 
 compute_qr_decomposition <- base::qr
@@ -37,27 +51,15 @@ compute_rref <- function (m, tolerance) {
   list(matrix = m, pivot_columns = pivot_columns)
 }
 
-#' @param m factor loading matrix with dimensions factors x observations
-#' @param tolerance tolerance for numeric errors; if \code{abs(a) < tolerance} then
-#' \code{a} is considered to be zero
+#' @param delta 0-1 identicator of factor loading matrix with dimensions factors x observations
+#' @rdname glt_framework
 #' @export
-to_glt <- function (m, tolerance) {
-  pivot_columns <- compute_rref(m, tolerance)$pivot_columns
-  qr <- compute_qr_decomposition(m[, pivot_columns])
-  q <- base::qr.Q(qr)
-  result <- crossprod(q, m)
-  result[abs(result) < tolerance] <- 0
-  result
-}
-
-#' @param m 0-1 identicator of factor loading matrix with dimensions factors x observations
-#' @export
-is_glt <- function (m) {
-    m <- m[rowSums(m) > 0, colSums(m) > 0, drop = FALSE]
-    if (NROW(m) == 0) {
+is_glt <- function (delta) {
+    delta <- delta[rowSums(delta) > 0, colSums(delta) > 0, drop = FALSE]
+    if (NROW(delta) == 0) {
         TRUE
     } else {
-        cs <- which(colSums(m) == 1L)
-        length(cs) > 0 && is_glt(m[which(m[, cs[1]] != 0), -cs[1], drop = FALSE])
+        cs <- which(colSums(delta) == 1L)
+        length(cs) > 0 && is_glt(delta[which(delta[, cs[1]] != 0), -cs[1], drop = FALSE])
     }
 }

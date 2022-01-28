@@ -6,11 +6,6 @@
 
 using namespace Rcpp;
 
-#ifdef RCPP_USE_GLOBAL_ROSTREAM
-Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
-Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
-#endif
-
 // counting_rule_holds_r
 bool counting_rule_holds_r(const Rcpp::IntegerMatrix& delta_in);
 RcppExport SEXP _econometric_factor_identification_counting_rule_holds_r(SEXP delta_inSEXP) {
