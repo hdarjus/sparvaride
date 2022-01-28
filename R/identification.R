@@ -6,7 +6,13 @@ default_tolerance <- 2 * sqrt(.Machine$double.eps)
 #' @export
 variance_is_identified <- function (m, tolerance = default_tolerance) {
   m_glt <- to_glt(m, tolerance = tolerance)
-  variance_is_identified_identicator(m_glt != 0)
+  delta <- m_glt != 0
+  if (NROW(m_glt) < NROW(m) || any(rowSums(delta) == 0)) {  # zero column in delta
+    FALSE
+  } else {
+    delta <- delta[, colSums(delta) > 0]
+    variance_is_identified_identicator(delta)
+  }
 }
 
 compute_qr_decomposition <- base::qr
