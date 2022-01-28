@@ -2,10 +2,10 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 variance_is_identified_identicator <- function(delta_in) {
-    .Call('_econometric_factor_identification_counting_rule_holds_r', PACKAGE = 'econometric.factor.identification', delta_in)
+    .Call(`_econometric_factor_identification_counting_rule_holds_r`, delta_in)
 }
 
 max_flow_r <- function(delta_in) {
-    .Call('_econometric_factor_identification_max_flow_r', PACKAGE = 'econometric.factor.identification', delta_in)
+    .Call(`_econometric_factor_identification_max_flow_r`, delta_in)
 }
 
