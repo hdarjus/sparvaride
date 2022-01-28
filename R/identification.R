@@ -19,18 +19,17 @@ compute_qr_decomposition <- base::qr
 
 #' apply tolerance after every step and not just at the end
 compute_rref <- function (m, tolerance) {
+  available_rows <- rep(TRUE, NROW(m))
   column <- 1L
-  row <- 1L
   pivot_columns <- c()
   m[abs(m) < tolerance] <- 0
-  while (column <= NCOL(m) && row <= NROW(m)) {
-    nonzero_indices <- row - 1L + which(m[seq(row, NROW(m)), column] != 0)
-    if (length(nonzero_indices) > 0) {
-      m[row, ] <- m[row, ] + m[tail(nonzero_indices, 1), ]  # handle the case when m[row, column] == 0
+  while (column <= NCOL(m) && any(available_rows)) {
+    if (any(m[available_rows, column] != 0)) {
+      row <- which(available_rows)[which.max(abs(m[available_rows, column]))]  # index_of_largest
       m[row, ] <- m[row, ] / m[row, column]
       m[-row, ] <- m[-row, ] - m[-row, column] %o% m[row, ]
       pivot_columns <- c(pivot_columns, column)
-      row <- row + 1L
+      available_rows[row] <- FALSE
     }
     m[abs(m) < tolerance] <- 0
     column <- column + 1L
