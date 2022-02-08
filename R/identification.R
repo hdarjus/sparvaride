@@ -31,7 +31,7 @@ to_glt <- function (m, tolerance) {
 
 compute_qr_decomposition <- base::qr
 
-#' apply tolerance after every step and not just at the end
+# apply tolerance after every step and not just at the end
 compute_rref <- function (m, tolerance) {
   available_rows <- rep(TRUE, NROW(m))
   column <- 1L
