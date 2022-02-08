@@ -6,7 +6,7 @@ Author: Darjus Hosszejni, Sylvia Frühwirth-Schnatter
 Maintainer: Darjus Hosszejni <darjus.hosszejni@wu.ac.at>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: GPL3
+License: GPL (>= 3)
 SystemRequirements: C++14
 Encoding: UTF-8
 LazyData: true
