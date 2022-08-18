@@ -1,13 +1,21 @@
 #include <RcppArmadillo.h>
-#include <Rcpp.h>
-#include <limits>
-#include <queue>
-#include <vector>
+#include "edmonds_karp.h"
+
+int max_flow_sufficient(
+    const arma::umat& delta);
+
+// [[Rcpp::export("max_flow_sufficient")]]
+int max_flow_sufficient_r(
+    const Rcpp::IntegerMatrix& delta_in) {
+  arma::umat delta (delta_in.nrow(), delta_in.ncol());
+  std::copy(delta_in.cbegin(), delta_in.cend(), delta.begin());
+  return max_flow_sufficient(delta);
+}
 
 bool counting_rule_holds(
     const arma::umat& delta);
 
-// [[Rcpp::export("variance_is_identified_identicator")]]
+// [[Rcpp::export("variance_is_identified_indicator")]]
 bool counting_rule_holds_r(
     const Rcpp::IntegerMatrix& delta_in) {
   arma::umat delta (delta_in.nrow(), delta_in.ncol());
@@ -15,29 +23,7 @@ bool counting_rule_holds_r(
   return counting_rule_holds(delta);
 }
 
-int max_flow(const arma::umat& delta);
-
-// [[Rcpp::export]]
-int max_flow_r(
-    const Rcpp::IntegerMatrix& delta_in) {
-  arma::umat delta (delta_in.nrow(), delta_in.ncol());
-  std::copy(delta_in.cbegin(), delta_in.cend(), delta.begin());
-  return max_flow(delta);
-}
-
-using Vertex = unsigned int;
-
-struct Edge {
-  Vertex start,
-         end;
-  int capacity,
-      flow;
-  Edge* reverse = nullptr;
-};
-
-using EdgeList = std::vector<Edge>;
-using Graph = std::vector<EdgeList>;
-
+static
 Graph delta_to_graph(
     const arma::umat& delta) {
   const unsigned int n_factors = delta.n_rows,
@@ -91,6 +77,7 @@ Graph delta_to_graph(
   return graph;
 }
 
+static
 arma::umat graph_to_delta(
     const Graph& graph) {
   const unsigned int n_factors = graph[0].size();
@@ -138,51 +125,6 @@ arma::umat graph_to_delta(
   return delta;
 }
 
-unsigned int edmonds_karp (
-    Graph& graph) {
-  const Vertex source = 0;
-  const Vertex target = graph.size() - 1;
-  int flow = 0;
-  while (true) {
-    std::vector<Edge*> predecessor (graph.size());  // store edge taken to get to a vertex
-    std::fill(predecessor.begin(), predecessor.end(), nullptr);
-    // run a breadth-first search to findthe shortest s-t path
-    std::queue<Vertex> q;
-    q.push(0);
-    while (not q.empty()) {
-      const Vertex current = q.front();
-      q.pop();
-      for (Edge& edge : graph[current]) {
-        if (predecessor[edge.end] == nullptr and
-            edge.end != source and
-            edge.capacity > edge.flow) {
-          predecessor[edge.end] = &edge;
-          q.push(edge.end);
-        }
-      }
-    }
-
-    if (predecessor[target] != nullptr) {
-      // we found an augmenting path
-      // see how much from we can send
-      int df = std::numeric_limits<int>::max();
-      for (Edge* edge_ptr = predecessor[target]; edge_ptr != nullptr; edge_ptr = predecessor[edge_ptr -> start]) {
-        df = std::min(df, (edge_ptr -> capacity) - (edge_ptr -> flow));
-      }
-      // update edges by that amount
-      for (Edge* edge_ptr = predecessor[target]; edge_ptr != nullptr; edge_ptr = predecessor[edge_ptr -> start]) {
-        edge_ptr -> flow += df;
-        edge_ptr -> reverse -> flow -= df;
-      }
-      flow += df;
-    } else {
-      break;
-    }
-  }
-
-  return flow;
-}
-
 bool counting_rule_holds(
     const arma::umat& delta) {
   const unsigned int r = delta.n_rows;
@@ -207,7 +149,7 @@ bool counting_rule_holds(
   return max_flow == r * (2 * r + 1);
 }
 
-int max_flow(
+int max_flow_sufficient(
     const arma::umat& delta) {
   const unsigned int r = delta.n_rows;
   // quick check

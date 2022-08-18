@@ -14,7 +14,7 @@ variance_is_identified <- function (m, tolerance = default_tolerance) {
     FALSE
   } else {
     delta <- delta[, colSums(delta) > 0]
-    variance_is_identified_identicator(delta)
+    variance_is_identified_indicator(delta)
   }
 }
 
@@ -51,7 +51,7 @@ compute_rref <- function (m, tolerance) {
   list(matrix = m, pivot_columns = pivot_columns)
 }
 
-#' @param delta 0-1 identicator of factor loading matrix with dimensions factors x observations
+#' @param delta 0-1 indicator of factor loading matrix with dimensions factors x observations
 #' @rdname glt_framework
 #' @export
 is_glt <- function (delta) {

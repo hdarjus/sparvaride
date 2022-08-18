@@ -1,4 +1,5 @@
 ^renv$
+^\.undodir$
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$

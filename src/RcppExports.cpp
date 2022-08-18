@@ -11,6 +11,17 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// max_flow_sufficient_r
+int max_flow_sufficient_r(const Rcpp::IntegerMatrix& delta_in);
+RcppExport SEXP _econometric_factor_identification_max_flow_sufficient_r(SEXP delta_inSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::IntegerMatrix& >::type delta_in(delta_inSEXP);
+    rcpp_result_gen = Rcpp::wrap(max_flow_sufficient_r(delta_in));
+    return rcpp_result_gen;
+END_RCPP
+}
 // counting_rule_holds_r
 bool counting_rule_holds_r(const Rcpp::IntegerMatrix& delta_in);
 RcppExport SEXP _econometric_factor_identification_counting_rule_holds_r(SEXP delta_inSEXP) {
@@ -22,21 +33,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// max_flow_r
-int max_flow_r(const Rcpp::IntegerMatrix& delta_in);
-RcppExport SEXP _econometric_factor_identification_max_flow_r(SEXP delta_inSEXP) {
+// max_flow_necessary_r
+int max_flow_necessary_r(const Rcpp::IntegerMatrix& delta_in);
+RcppExport SEXP _econometric_factor_identification_max_flow_necessary_r(SEXP delta_inSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Rcpp::IntegerMatrix& >::type delta_in(delta_inSEXP);
-    rcpp_result_gen = Rcpp::wrap(max_flow_r(delta_in));
+    rcpp_result_gen = Rcpp::wrap(max_flow_necessary_r(delta_in));
+    return rcpp_result_gen;
+END_RCPP
+}
+// necessary_condition_holds_r
+bool necessary_condition_holds_r(const Rcpp::IntegerMatrix& delta_in);
+RcppExport SEXP _econometric_factor_identification_necessary_condition_holds_r(SEXP delta_inSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const Rcpp::IntegerMatrix& >::type delta_in(delta_inSEXP);
+    rcpp_result_gen = Rcpp::wrap(necessary_condition_holds_r(delta_in));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_econometric_factor_identification_max_flow_sufficient_r", (DL_FUNC) &_econometric_factor_identification_max_flow_sufficient_r, 1},
     {"_econometric_factor_identification_counting_rule_holds_r", (DL_FUNC) &_econometric_factor_identification_counting_rule_holds_r, 1},
-    {"_econometric_factor_identification_max_flow_r", (DL_FUNC) &_econometric_factor_identification_max_flow_r, 1},
+    {"_econometric_factor_identification_max_flow_necessary_r", (DL_FUNC) &_econometric_factor_identification_max_flow_necessary_r, 1},
+    {"_econometric_factor_identification_necessary_condition_holds_r", (DL_FUNC) &_econometric_factor_identification_necessary_condition_holds_r, 1},
     {NULL, NULL, 0}
 };
 

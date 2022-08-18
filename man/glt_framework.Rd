@@ -18,7 +18,7 @@ is_glt(delta)
 \item{tolerance}{tolerance for numeric errors; if \code{abs(a) < tolerance} then
 \code{a} is considered to be zero}
 
-\item{delta}{0-1 identicator of factor loading matrix with dimensions factors x observations}
+\item{delta}{0-1 indicator of factor loading matrix with dimensions factors x observations}
 }
 \description{
 Functions for working with the GLT framework

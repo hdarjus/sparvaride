@@ -28,7 +28,7 @@ test_that("simple varide works", {
   )
 
   for (test_case in test_cases) {
-    expect_equal(variance_is_identified_identicator(t(test_case[[1]])), test_case[[2]])
+    expect_equal(variance_is_identified_indicator(t(test_case[[1]])), test_case[[2]])
   }
 })
 
@@ -73,11 +73,11 @@ test_that("simulated varide works", {
     r <- 5 + sample.int(13, 1)
     m <- 2 * r + sample.int(5, 1)
     delta <- simulate_delta(m, r)
-    expect_equal(variance_is_identified_identicator(t(delta)), brute_force_varide(delta))
+    expect_equal(variance_is_identified_indicator(t(delta)), brute_force_varide(delta))
 
     mat <- t(delta)
     mat[mat == 1] <- rnorm(sum(mat == 1))
     rotation <- qr.Q(qr(matrix(rnorm(NROW(mat)^2), NROW(mat))))
-    expect_equal(variance_is_identified_identicator(t(delta)), variance_is_identified(rotation %*% mat))
+    expect_equal(variance_is_identified_indicator(t(delta)), variance_is_identified(rotation %*% mat))
   })
 })
