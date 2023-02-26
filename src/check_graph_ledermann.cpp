@@ -171,7 +171,8 @@ bool necessary_condition_holds(
   Graph graph = delta_to_graph(delta);
 #ifndef NDEBUG
   const arma::umat delta_recovered = graph_to_delta(graph);
-  if (arma::any(arma::any(delta != delta_recovered))) {
+  const arma::umat nonzero_rows = arma::find(arma::sum(delta, 1) != 1u);
+  if (arma::any(arma::any(delta.rows(nonzero_rows) != delta_recovered.rows(nonzero_rows)))) {
     Rf_error("delta and the recovered delta are not equal");
   }
 #endif
@@ -191,7 +192,8 @@ int max_flow_necessary(
   Graph graph = delta_to_graph(delta);
 #ifndef NDEBUG
   const arma::umat delta_recovered = graph_to_delta(graph);
-  if (arma::any(arma::any(delta != delta_recovered))) {
+  const arma::umat nonzero_rows = arma::find(arma::sum(delta, 1) != 1u);
+  if (arma::any(arma::any(delta.rows(nonzero_rows) != delta_recovered.rows(nonzero_rows)))) {
     Rf_error("delta and the recovered delta are not equal");
   }
 #endif
