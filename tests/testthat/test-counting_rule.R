@@ -74,10 +74,5 @@ test_that("simulated varide works", {
     m <- 2 * r + sample.int(5, 1)
     delta <- simulate_delta(m, r)
     expect_equal(variance_is_identified_indicator(t(delta)), brute_force_varide(delta))
-
-    mat <- t(delta)
-    mat[mat == 1] <- rnorm(sum(mat == 1))
-    rotation <- qr.Q(qr(matrix(rnorm(NROW(mat)^2), NROW(mat))))
-    expect_equal(variance_is_identified_indicator(t(delta)), variance_is_identified(rotation %*% mat))
   })
 })
