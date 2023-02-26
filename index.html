@@ -106,10 +106,8 @@
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>         nrow <span class="op">=</span> <span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         nrow <span class="op">=</span> <span class="fl">7</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>         byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, :</span></span>
-<span><span class="co">#&gt; data length [21] is not a sub-multiple or multiple of the number of rows [6]</span></span>
 <span><span class="va">delta2</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>,</span>
 <span>           <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>,</span>
@@ -118,16 +116,14 @@
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>         nrow <span class="op">=</span> <span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>         byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, :</span></span>
-<span><span class="co">#&gt; data length [21] is not a sub-multiple or multiple of the number of rows [6]</span></span></code></pre></div>
+<span>         nrow <span class="op">=</span> <span class="fl">7</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Then, we call the <code>counting_rule_holds</code> function on these matrices:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/counting_rule_holds.html">counting_rule_holds</a></span><span class="op">(</span><span class="va">delta1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="fu"><a href="reference/counting_rule_holds.html">counting_rule_holds</a></span><span class="op">(</span><span class="va">delta2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>

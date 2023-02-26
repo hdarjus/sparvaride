@@ -103,9 +103,9 @@ change.</p>
 <code>counting_rule_holds</code> with one input variable: a binary
 matrix <span class="math inline">\(\delta\in\{0,1\}^{m\times
 r}\)</span>. This binary matrix <span class="math inline">\(\delta\)</span> should be the sparsity pattern of
-the factor loading matrix <span class="math inline">\(\beta\in\mathcal{R}^{m\times r}\)</span> in sparse
+the factor loading matrix <span class="math inline">\(\beta\in\mathbb{R}^{m\times r}\)</span> in sparse
 factor analysis: <span class="math display">\[y_i = \beta f_i +
-\epsilon_i,\]</span> where <span class="math inline">\(y_i\in\mathcal{R}^m\)</span> is the <span class="math inline">\(i\)</span>th vector of observations, <span class="math inline">\(f_i\in\mathcal{R}^r\)</span> is the <span class="math inline">\(i\)</span>th vector of latent factors, <span class="math inline">\(\epsilon_i\in\mathcal{R}^m\)</span> is the <span class="math inline">\(i\)</span>th vector of idiosyncratic errors, and
+\epsilon_i,\]</span> where <span class="math inline">\(y_i\in\mathbb{R}^m\)</span> is the <span class="math inline">\(i\)</span>th vector of observations, <span class="math inline">\(f_i\in\mathbb{R}^r\)</span> is the <span class="math inline">\(i\)</span>th vector of latent factors, <span class="math inline">\(\epsilon_i\in\mathbb{R}^m\)</span> is the <span class="math inline">\(i\)</span>th vector of idiosyncratic errors, and
 <span class="math inline">\(i=1,...,n\)</span>. In sparse factor
 analysis, the factor loading matrix <span class="math inline">\(\beta\)</span> may be sparse, i.e., <span class="math inline">\(\beta\)</span> may only have a small number of
 non-zero entries. Importantly, <span class="math inline">\(\beta\)</span> may have (estimated) structural
@@ -169,10 +169,8 @@ function in the <code>sparvaride</code> package.</p>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>         nrow <span class="op">=</span> <span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         nrow <span class="op">=</span> <span class="fl">7</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>         byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, :</span></span>
-<span><span class="co">#&gt; data length [21] is not a sub-multiple or multiple of the number of rows [6]</span></span>
 <span><span class="va">delta2</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>,</span>
 <span>           <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>,</span>
@@ -181,17 +179,15 @@ function in the <code>sparvaride</code> package.</p>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>,</span>
 <span>           <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>         nrow <span class="op">=</span> <span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>         byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, :</span></span>
-<span><span class="co">#&gt; data length [21] is not a sub-multiple or multiple of the number of rows [6]</span></span></code></pre></div>
+<span>         nrow <span class="op">=</span> <span class="fl">7</span>, ncol <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>         byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Then, we call the <code>counting_rule_holds</code> function on these
 matrices:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/counting_rule_holds.html">counting_rule_holds</a></span><span class="op">(</span><span class="va">delta1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="fu"><a href="../reference/counting_rule_holds.html">counting_rule_holds</a></span><span class="op">(</span><span class="va">delta2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
