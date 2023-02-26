@@ -52,7 +52,7 @@ delta1 <-
            1, 0, 1,
            1, 0, 1,
            1, 0, 1),
-         nrow = 6, ncol = 3,
+         nrow = 7, ncol = 3,
          byrow = TRUE)
 delta2 <-
   matrix(c(1, 0, 0,
@@ -62,7 +62,7 @@ delta2 <-
            1, 0, 1,
            1, 1, 1,
            1, 0, 1),
-         nrow = 6, ncol = 3,
+         nrow = 7, ncol = 3,
          byrow = TRUE)
 ```
 

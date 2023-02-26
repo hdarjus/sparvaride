@@ -47,10 +47,8 @@ delta1 <-
            1, 0, 1,
            1, 0, 1,
            1, 0, 1),
-         nrow = 6, ncol = 3,
+         nrow = 7, ncol = 3,
          byrow = TRUE)
-#> Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, :
-#> data length [21] is not a sub-multiple or multiple of the number of rows [6]
 delta2 <-
   matrix(c(1, 0, 0,
            0, 1, 0,
@@ -59,10 +57,8 @@ delta2 <-
            1, 0, 1,
            1, 1, 1,
            1, 0, 1),
-         nrow = 6, ncol = 3,
+         nrow = 7, ncol = 3,
          byrow = TRUE)
-#> Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, :
-#> data length [21] is not a sub-multiple or multiple of the number of rows [6]
 ```
 
 Then, we call the `counting_rule_holds` function on these matrices:
@@ -71,7 +67,7 @@ Then, we call the `counting_rule_holds` function on these matrices:
 counting_rule_holds(delta1)
 #> [1] FALSE
 counting_rule_holds(delta2)
-#> [1] FALSE
+#> [1] TRUE
 ```
 
 ## Citation

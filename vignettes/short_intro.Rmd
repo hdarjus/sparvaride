@@ -25,9 +25,9 @@ The package is still under development and the API is subject to change.
 ## Problem Statement
 
 At the moment, the package has a single exported function called `counting_rule_holds` with one input variable: a binary matrix $\delta\in\{0,1\}^{m\times r}$.
-This binary matrix $\delta$ should be the sparsity pattern of the factor loading matrix $\beta\in\mathcal{R}^{m\times r}$ in sparse factor analysis:
+This binary matrix $\delta$ should be the sparsity pattern of the factor loading matrix $\beta\in\mathbb{R}^{m\times r}$ in sparse factor analysis:
 $$y_i = \beta f_i + \epsilon_i,$$
-where $y_i\in\mathcal{R}^m$ is the $i$th vector of observations, $f_i\in\mathcal{R}^r$ is the $i$th vector of latent factors, $\epsilon_i\in\mathcal{R}^m$ is the $i$th vector of idiosyncratic errors, and $i=1,...,n$.
+where $y_i\in\mathbb{R}^m$ is the $i$th vector of observations, $f_i\in\mathbb{R}^r$ is the $i$th vector of latent factors, $\epsilon_i\in\mathbb{R}^m$ is the $i$th vector of idiosyncratic errors, and $i=1,...,n$.
 In sparse factor analysis, the factor loading matrix $\beta$ may be sparse, i.e., $\beta$ may only have a small number of non-zero entries.
 Importantly, $\beta$ may have (estimated) structural zeros, and the sparsity pattern is $\delta=I(\beta \neq 0)$, where $I()$ is the indicator function.
 For mathematical tractability, we assume orthogonal factors, i.e., $\text{cov}(f_i)=I_r$ identity, and homoskedasticity for the observation series, i.e., $\text{cov}(\epsilon_i)$ is diagonal.
@@ -81,7 +81,7 @@ delta1 <-
            1, 0, 1,
            1, 0, 1,
            1, 0, 1),
-         nrow = 6, ncol = 3,
+         nrow = 7, ncol = 3,
          byrow = TRUE)
 delta2 <-
   matrix(c(1, 0, 0,
@@ -91,7 +91,7 @@ delta2 <-
            1, 0, 1,
            1, 1, 1,
            1, 0, 1),
-         nrow = 6, ncol = 3,
+         nrow = 7, ncol = 3,
          byrow = TRUE)
 ```
 
