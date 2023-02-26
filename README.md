@@ -1,54 +1,100 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# econometric.factor.identification
+# Package `sparvaride`
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/hdarjus/econometric.factor.identification/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hdarjus/econometric.factor.identification/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of econometric.factor.identification is to …
+The package implements the variance identification algorithm for sparse
+factor analysis described in the paper “Cover It Up\! Bipartite Graphs
+Uncover Identifiability in Sparse Factor Analysis” by Darjus Hosszejni
+and Sylvia Frühwirth-Schnatter. The paper is available at
+[arXiv](https://arxiv.org/abs/2211.00671).
+
+The package is still under development and the API is subject to change.
 
 ## Installation
 
-You can install the development version of
-econometric.factor.identification from [GitHub](https://github.com/)
-with:
+You can install the development version of `sparvaride` from
+[GitHub](https://github.com/hdarjus/sparvaride) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("hdarjus/econometric.factor.identification")
+devtools::install_github("hdarjus/sparvaride")
 ```
 
-## Example
+## The `counting_rule_holds` Function
 
-This is a basic example which shows you how to solve a common problem:
+We can check whether the 3579 counting rule holds for a given binary
+matrix `delta` using the `counting_rule_holds` function in the
+`sparvaride` package.
 
 ``` r
-library(econometric.factor.identification)
-## basic example code
+library(sparvaride)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+We define two matrices as above in R:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+delta1 <-
+  matrix(c(1, 0, 0,
+           0, 1, 0,
+           0, 0, 1,
+           1, 1, 1,
+           1, 0, 1,
+           1, 0, 1,
+           1, 0, 1),
+         nrow = 6, ncol = 3,
+         byrow = TRUE)
+#> Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, :
+#> data length [21] is not a sub-multiple or multiple of the number of rows [6]
+delta2 <-
+  matrix(c(1, 0, 0,
+           0, 1, 0,
+           0, 0, 1,
+           1, 1, 1,
+           1, 0, 1,
+           1, 1, 1,
+           1, 0, 1),
+         nrow = 6, ncol = 3,
+         byrow = TRUE)
+#> Warning in matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, :
+#> data length [21] is not a sub-multiple or multiple of the number of rows [6]
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+Then, we call the `counting_rule_holds` function on these matrices:
 
-You can also embed plots, for example:
+``` r
+counting_rule_holds(delta1)
+#> [1] FALSE
+counting_rule_holds(delta2)
+#> [1] FALSE
+```
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+## Citation
+
+For citing our work, please check the `citation` function in R:
+
+``` r
+citation("sparvaride")
+#> 
+#> To cite sparvaride in publications use:
+#> 
+#>   Hosszejni D, Frühwirth-Schnatter S (2022). "Cover It Up! Bipartite
+#>   Graphs Uncover Identifiability in Sparse Factor Analysis."
+#>   doi:10.48550/arXiv.2211.00671
+#>   <https://doi.org/10.48550/arXiv.2211.00671>, arXiv: 2211.00671.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Unpublished{,
+#>     title = {Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis},
+#>     author = {Darjus Hosszejni and Sylvia Frühwirth-Schnatter},
+#>     year = {2022},
+#>     note = {arXiv: 2211.00671},
+#>     doi = {10.48550/arXiv.2211.00671},
+#>   }
+```
