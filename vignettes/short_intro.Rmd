@@ -1,0 +1,111 @@
+---
+title: "The 3579 Counting Rule in Sparse Factor Analysis"
+output: rmarkdown::html_vignette
+author: Darjus Hosszejni and Sylvia Frühwirth-Schnatter
+date: February 2023
+vignette: >
+  %\VignetteIndexEntry{short_intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is a short introduction to the `sparvaride` package.
+The package implements the variance identification algorithm for sparse factor analysis described in the paper "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis" by Darjus Hosszejni and Sylvia Frühwirth-Schnatter.
+The paper is available at [arXiv](https://arxiv.org/abs/2211.00671).
+
+The package is still under development and the API is subject to change.
+
+## Problem Statement
+
+At the moment, the package has a single exported function called `counting_rule_holds` with one input variable: a binary matrix $\delta\in\{0,1\}^{m\times r}$.
+This binary matrix $\delta$ should be the sparsity pattern of the factor loading matrix $\beta\in\mathcal{R}^{m\times r}$ in sparse factor analysis:
+$$y_i = \beta f_i + \epsilon_i,$$
+where $y_i\in\mathcal{R}^m$ is the $i$th vector of observations, $f_i\in\mathcal{R}^r$ is the $i$th vector of latent factors, $\epsilon_i\in\mathcal{R}^m$ is the $i$th vector of idiosyncratic errors, and $i=1,...,n$.
+In sparse factor analysis, the factor loading matrix $\beta$ may be sparse, i.e., $\beta$ may only have a small number of non-zero entries.
+Importantly, $\beta$ may have (estimated) structural zeros, and the sparsity pattern is $\delta=I(\beta \neq 0)$, where $I()$ is the indicator function.
+For mathematical tractability, we assume orthogonal factors, i.e., $\text{cov}(f_i)=I_r$ identity, and homoskedasticity for the observation series, i.e., $\text{cov}(\epsilon_i)$ is diagonal.
+
+In this setup, the covariance matrix $\text{cov}(\epsilon_i)$ of the idiosyncratic errors may not be uniquely identified if there are too many zeros in $\beta$ (and thus in $\delta$).
+The 3579 counting rule is a sufficient condition for the uniqueness of the covariance matrix $\text{cov}(\epsilon_i)$.
+More information on the 3579 counting rule can be found in the paper "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis" by Darjus Hosszejni and Sylvia Frühwirth-Schnatter at [https://arxiv.org/abs/2211.00671](https://arxiv.org/abs/2211.00671).
+
+## The 3579 Counting Rule
+
+**Def.** Let $\delta\in\{0,1\}^{m\times r}$ be a binary matrix.
+Then, the 3579 counting rule is the following condition: for all $q=1,...,r$, all submatrices of $\delta$ consisting of $q$ columns of $\delta$ have at least $2q+1$ non-zero entries.
+
+For example, for $\delta_1$ below the counting rule does not hold because there is a $q$ (namely, $q=1$), such that there is a submatrix of $\delta_1$ consisting of $1$ column of $\delta_1$ that has only $2q=2$ non-zero entries: the middle column.
+For $\delta_2$, however, the counting rule holds because there is no $q$ such that there is a submatrix of $\delta_2$ consisting of $q$ columns of $\delta_2$ that has only $2q$ non-zero entries.
+
+$$\delta_1=\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 0 & 1 \\
+1 & 0 & 1
+\end{pmatrix}, \quad\quad\quad \delta_2=\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+1 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 1 \\
+1 & 0 & 1
+\end{pmatrix}$$
+
+## The `counting_rule_holds` Function
+
+We can check whether the 3579 counting rule holds for a given binary matrix `delta` using the `counting_rule_holds` function in the `sparvaride` package.
+
+```{r setup}
+library(sparvaride)
+```
+
+We define two matrices as above in R:
+
+```{r examples}
+delta1 <-
+  matrix(c(1, 0, 0,
+           0, 1, 0,
+           0, 0, 1,
+           1, 1, 1,
+           1, 0, 1,
+           1, 0, 1,
+           1, 0, 1),
+         nrow = 6, ncol = 3,
+         byrow = TRUE)
+delta2 <-
+  matrix(c(1, 0, 0,
+           0, 1, 0,
+           0, 0, 1,
+           1, 1, 1,
+           1, 0, 1,
+           1, 1, 1,
+           1, 0, 1),
+         nrow = 6, ncol = 3,
+         byrow = TRUE)
+```
+
+Then, we call the `counting_rule_holds` function on these matrices:
+
+```{r counting_rule_holds}
+counting_rule_holds(delta1)
+counting_rule_holds(delta2)
+```
+
+## Citation
+
+For citing our work, please check the `citation` function in R:
+
+```{r citation}
+citation("sparvaride")
+```

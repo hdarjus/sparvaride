@@ -1,4 +1,4 @@
 library(testthat)
-library(econometric.factor.identification)
+library(sparvaride)
 
-test_check("econometric.factor.identification")
+test_check("sparvaride")

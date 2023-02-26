@@ -1,27 +1,30 @@
 #include <RcppArmadillo.h>
 #include "edmonds_karp.h"
 
-int max_flow_sufficient(
-    const arma::umat& delta);
-
-// [[Rcpp::export("max_flow_sufficient")]]
-int max_flow_sufficient_r(
-    const Rcpp::IntegerMatrix& delta_in) {
-  arma::umat delta (delta_in.nrow(), delta_in.ncol());
-  std::copy(delta_in.cbegin(), delta_in.cend(), delta.begin());
-  return max_flow_sufficient(delta);
-}
-
+//' Verify that the counting rule CR(r,1) holds
+//'
+//' This is an implementation of the algorithm described in Section 3 of
+//' Hosszejni and Fruehwirth-Schnatter (2022). The algorithm is used to verify
+//' that the counting rule CR(r,1) holds for the sparsity pattern of the transpose
+//' of a factor loading matrix. As detailed in Section 2 of the same paper, if
+//' CR(r,1) holds, then the idiosyncratic variances are generically identified.
+//' If CR(r,1) does not hold, then we do not know whether the idiosyncratic
+//' variances are identified or not.
+//'
+//' @param delta an `m` x `r` matrix of `0`s and `1`s, where `delta(i,j) == 1` if and only if
+//'    the i-th observation loads on the j-th factor
+//' @returns `TRUE` if CR(`r`,`1`) holds, `FALSE` otherwise
+//' @keywords models multivariate
+//' @concept factor analysis variance identification
+//' @seealso [stats::factanal()]
+//' @references Hosszejni and Fruehwirth-Schnatter (2022). "Cover It Up! Bipartite
+//'    Graphs Uncover Identifiability in Sparse Factor Analysis". arXiv:2211.00671.
+//'    <doi:10.48550/arXiv.2211.00671>
+//' @example inst/examples/counting_rule_holds.R
+//' @export
+// [[Rcpp::export(name="counting_rule_holds", rng=false)]]
 bool counting_rule_holds(
-    const arma::umat& delta);
-
-// [[Rcpp::export("variance_is_identified_indicator")]]
-bool counting_rule_holds_r(
-    const Rcpp::IntegerMatrix& delta_in) {
-  arma::umat delta (delta_in.nrow(), delta_in.ncol());
-  std::copy(delta_in.cbegin(), delta_in.cend(), delta.begin());  // why copy??
-  return counting_rule_holds(delta);
-}
+    const arma::mat& delta);
 
 static
 Graph delta_to_graph(
@@ -126,49 +129,27 @@ arma::umat graph_to_delta(
 }
 
 bool counting_rule_holds(
-    const arma::umat& delta) {
-  const unsigned int r = delta.n_rows;
+    const arma::mat& delta) {  // input is not transposed
+  const arma::umat udelta = arma::trans(delta > 0);
+  const unsigned int r = udelta.n_rows;
   // quick check
-  if (delta.n_cols <= 2 * r) {
+  if (udelta.n_cols <= 2 * r) {
     return false;
   }
-  if (not arma::all(arma::sum(delta, 0) > 0) or
-      not arma::all(arma::sum(delta, 1) > 0)) {
+  if (not arma::all(arma::sum(udelta, 0) > 0) or
+      not arma::all(arma::sum(udelta, 1) > 0)) {
     Rf_error("delta has zero rows or zero columns");
   }
 
   // resort to the vertex covering method
-  Graph graph = delta_to_graph(delta);
+  Graph graph = delta_to_graph(udelta);
 #ifndef NDEBUG
-  const arma::umat delta_recovered = graph_to_delta(graph);
-  if (arma::any(arma::any(delta != delta_recovered))) {
+  const arma::umat udelta_recovered = graph_to_delta(graph);
+  if (arma::any(arma::any(udelta != udelta_recovered))) {
     Rf_error("delta and the recovered delta are not equal");
   }
 #endif
   const unsigned int max_flow = edmonds_karp(graph);
   return max_flow == r * (2 * r + 1);
-}
-
-int max_flow_sufficient(
-    const arma::umat& delta) {
-  const unsigned int r = delta.n_rows;
-  // quick check
-  if (delta.n_cols <= 2 * r) {
-    return false;
-  }
-  if (not arma::all(arma::sum(delta, 0) > 0) or
-      not arma::all(arma::sum(delta, 1) > 0)) {
-    Rf_error("delta has zero rows or zero columns");
-  }
-
-  // resort to the vertex covering method
-  Graph graph = delta_to_graph(delta);
-#ifndef NDEBUG
-  const arma::umat delta_recovered = graph_to_delta(graph);
-  if (arma::any(arma::any(delta != delta_recovered))) {
-    Rf_error("delta and the recovered delta are not equal");
-  }
-#endif
-  return edmonds_karp(graph);
 }
 

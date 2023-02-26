@@ -1,5 +1,5 @@
 ## usethis namespace: start
-#' @useDynLib econometric.factor.identification, .registration = TRUE
+#' @useDynLib sparvaride, .registration = TRUE
 ## usethis namespace: end
 NULL
 
