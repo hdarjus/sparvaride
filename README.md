@@ -3,11 +3,6 @@
 
 # Package `sparvaride`
 
-<!-- badges: start -->
-
-[![R-CMD-check](https://github.com/hdarjus/sparvaride/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hdarjus/sparvaride/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
-
 The package implements the variance identification algorithm for sparse
 factor analysis described in the paper “Cover It Up\! Bipartite Graphs
 Uncover Identifiability in Sparse Factor Analysis” by Darjus Hosszejni
