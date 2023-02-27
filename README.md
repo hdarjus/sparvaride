@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/hdarjus/econometric.factor.identification/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hdarjus/econometric.factor.identification/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/hdarjus/sparvaride/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hdarjus/sparvaride/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The package implements the variance identification algorithm for sparse
