@@ -10,6 +10,7 @@ and Sylvia Frühwirth-Schnatter. The paper is available at
 [arXiv](https://arxiv.org/abs/2211.00671).
 
 The package is still under development and the API is subject to change.
+For a Matlab implementation, see [`sparvaride-matlab`](https://github.com/hdarjus/sparvaride-matlab).
 
 ## Installation
 
