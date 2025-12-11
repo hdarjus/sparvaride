@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 This is a short introduction to the `sparvaride` package.
 The package implements the variance identification algorithm for sparse factor analysis described in the paper "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis" by Darjus Hosszejni and Sylvia Frühwirth-Schnatter.
-The paper is available at [arXiv](https://arxiv.org/abs/2211.00671).
+The paper is available at [DOI: 10.1016/j.jmva.2025.105536](https://doi.org/10.1016/j.jmva.2025.105536).
 
 The package is still under development and the API is subject to change.
 
@@ -34,7 +34,7 @@ For mathematical tractability, we assume orthogonal factors, i.e., $\text{cov}(f
 
 In this setup, the covariance matrix $\text{cov}(\epsilon_i)$ of the idiosyncratic errors may not be uniquely identified if there are too many zeros in $\beta$ (and thus in $\delta$).
 The 3579 counting rule is a sufficient condition for the uniqueness of the covariance matrix $\text{cov}(\epsilon_i)$.
-More information on the 3579 counting rule can be found in the paper "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis" by Darjus Hosszejni and Sylvia Frühwirth-Schnatter at [https://arxiv.org/abs/2211.00671](https://arxiv.org/abs/2211.00671).
+More information on the 3579 counting rule can be found in the paper "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis" by Darjus Hosszejni and Sylvia Frühwirth-Schnatter at [https://doi.org/10.1016/j.jmva.2025.105536](https://doi.org/10.1016/j.jmva.2025.105536).
 
 ## The 3579 Counting Rule
 

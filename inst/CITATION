@@ -5,7 +5,7 @@ if(!exists("meta") || is.null(meta)) meta <- packageDescription("sparvaride")
 year <- sub("-.*", "", meta$Packaged)
 note <- sprintf("R package version %s", meta$Version)
 
-bibentry(bibtype = "unpublished",
+bibentry(bibtype = "Article",
   title        = "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis",
   author       = c(person(given = "Darjus",
                           family = "Hosszejni",
@@ -13,9 +13,11 @@ bibentry(bibtype = "unpublished",
                    person(given = "Sylvia",
                           family = "Frühwirth-Schnatter",
                           email = "sylvia.fruehwirth-schnatter@wu.ac.at")),
-  year         = "2022",
-  note         = "arXiv: 2211.00671",
-  doi          = "10.48550/arXiv.2211.00671",
+  journal      = "Journal of Multivariate Analysis",
+  year         = "2025",
+  volume       = "206",
+  pages        = "105536",
+  doi          = "10.1016/j.jmva.2025.105536",
   header       = "To cite sparvaride in publications use:"
 )
 

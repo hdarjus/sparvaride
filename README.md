@@ -7,7 +7,7 @@ The package implements the variance identification algorithm for sparse
 factor analysis described in the paper “Cover It Up\! Bipartite Graphs
 Uncover Identifiability in Sparse Factor Analysis” by Darjus Hosszejni
 and Sylvia Frühwirth-Schnatter. The paper is available at
-[arXiv](https://arxiv.org/abs/2211.00671).
+[DOI: 10.1016/j.jmva.2025.105536](https://doi.org/10.1016/j.jmva.2025.105536).
 
 The package is still under development and the API is subject to change.
 For a Matlab implementation, see [`sparvaride-matlab`](https://github.com/hdarjus/sparvaride-matlab).
@@ -75,18 +75,21 @@ citation("sparvaride")
 #> 
 #> To cite sparvaride in publications use:
 #> 
-#>   Hosszejni D, Frühwirth-Schnatter S (2022). "Cover It Up! Bipartite
-#>   Graphs Uncover Identifiability in Sparse Factor Analysis."
-#>   doi:10.48550/arXiv.2211.00671
-#>   <https://doi.org/10.48550/arXiv.2211.00671>, arXiv: 2211.00671.
+#>   Hosszejni D, Frühwirth-Schnatter S (2025). "Cover It Up! Bipartite
+#>   Graphs Uncover Identifiability in Sparse Factor Analysis." _Journal
+#>   of Multivariate Analysis_, *206*, 105536.
+#>   doi:10.1016/j.jmva.2025.105536
+#>   <https://doi.org/10.1016/j.jmva.2025.105536>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Unpublished{,
+#>   @Article{,
 #>     title = {Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis},
 #>     author = {Darjus Hosszejni and Sylvia Frühwirth-Schnatter},
-#>     year = {2022},
-#>     note = {arXiv: 2211.00671},
-#>     doi = {10.48550/arXiv.2211.00671},
+#>     journal = {Journal of Multivariate Analysis},
+#>     year = {2025},
+#>     volume = {206},
+#>     pages = {105536},
+#>     doi = {10.1016/j.jmva.2025.105536},
 #>   }
 ```
