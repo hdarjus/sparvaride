@@ -15,7 +15,7 @@ the i-th observation loads on the j-th factor}
 }
 \description{
 This is an implementation of the algorithm described in Section 3 of
-Hosszejni and Fruehwirth-Schnatter (2022). The algorithm is used to verify
+Hosszejni and Fruehwirth-Schnatter (2026). The algorithm is used to verify
 that the counting rule CR(r,1) holds for the sparsity pattern of the transpose
 of a factor loading matrix. As detailed in Section 2 of the same paper, if
 CR(r,1) holds, then the idiosyncratic variances are generically identified.
@@ -51,9 +51,10 @@ counting_rule_holds(cr_does_not_hold)
 #> [1] FALSE
 }
 \references{
-Hosszejni and Fruehwirth-Schnatter (2022). "Cover It Up! Bipartite
-Graphs Uncover Identifiability in Sparse Factor Analysis". arXiv:2211.00671.
-\url{doi:10.48550/arXiv.2211.00671}
+Hosszejni and Fruehwirth-Schnatter (2026). "Cover It Up! Bipartite
+Graphs Uncover Identifiability in Sparse Factor Analysis". Journal of
+Multivariate Analysis, 211, 105536. ISSN 0047-259X.
+\url{doi:10.1016/j.jmva.2025.105536}
 }
 \seealso{
 \code{\link[stats:factanal]{stats::factanal()}}
