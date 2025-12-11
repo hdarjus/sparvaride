@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # Package `sparvaride`
 
 The package implements the variance identification algorithm for sparse factor analysis described in the paper "Cover It Up! Bipartite Graphs Uncover Identifiability in Sparse Factor Analysis" by Darjus Hosszejni and Sylvia Frühwirth-Schnatter.
-The paper is available at [arXiv](https://arxiv.org/abs/2211.00671).
+The paper is published in the [Journal of Multivariate Analysis](https://doi.org/10.1016/j.jmva.2025.105536).
 
 The package is still under development and the API is subject to change.
 For a Matlab implementation, see [`sparvaride-matlab`](https://github.com/hdarjus/sparvaride-matlab).
