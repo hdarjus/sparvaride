@@ -54,7 +54,7 @@ counting_rule_holds(cr_does_not_hold)
 Hosszejni and Fruehwirth-Schnatter (2026). "Cover It Up! Bipartite
 Graphs Uncover Identifiability in Sparse Factor Analysis". Journal of
 Multivariate Analysis, 211, 105536. ISSN 0047-259X.
-\url{https://doi.org/10.1016/j.jmva.2025.105536}
+\url{doi:10.1016/j.jmva.2025.105536}
 }
 \seealso{
 \code{\link[stats:factanal]{stats::factanal()}}

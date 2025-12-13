@@ -10,3 +10,4 @@
 ^Session\.vim$
 ^compile_flags\.txt$
 ^LICENSE\.md$
+_codeql_detected_source_root
